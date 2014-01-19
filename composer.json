@@ -1,0 +1,27 @@
+{
+    "name": "sescandell/payment-bitpay-bundle",
+    "type": "symfony-bundle",
+    "description": "Payment Bundle providing access to the Bitpay API",
+    "keywords": ["payment", "bitpay"],
+    "homepage": "https://github.com/sescandell/payment-bitpay-bundle",
+    "license": "Apache2",
+    "authors": [
+        {
+            "name": "Escandell Stéphane",
+            "email": "stephane.escandell@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "symfony/framework-bundle": "~2.4",
+        "jms/payment-core-bundle": "~1.0",
+        "sescandell/bitpay-client": "~1.0"
+    },
+    "require-dev": {
+        "symfony/browser-kit": "*"
+    },
+    "autoload": {
+        "psr-0": { "Sescandell\\Payment\\BitpayBundle": "" }
+    },
+    "target-dir": "Sescandell/Payment/BitpayBundle"
+}

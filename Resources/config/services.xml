@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="payment.plugin.bitpay_invoice_checkout.class">Sescandell\Payment\BitpayBundle\Plugin\BitpayInvoicePlugin</parameter>
+        <parameter key="payment.form.bitpay_invoice_checkout_type.class">Sescandell\Payment\BitpayBundle\Form\Type\BitpayInvoiceType</parameter>
+        <parameter key="payment.bitpay.client.class">Bitpay\Bitpay</parameter>
+    </parameters>
+
+    <services>
+        <service id="payment.bitpay.client" class="%payment.bitpay.client.class%"></service>
+        
+        <service id="payment.plugin.bitpay_invoice_checkout" class="%payment.plugin.bitpay_invoice_checkout.class%">
+            <argument type="service" id="payment.bitpay.client" />
+            <tag name="payment.plugin" />
+        </service>
+        
+        <service id="payment.form.bitpay_invoice_checkout_type" class="%payment.form.bitpay_invoice_checkout_type.class%">
+            <tag name="payment.method_form_type" />
+            <tag name="form.type" alias="bitpay_invoice_checkout" />
+        </service>
+    </services>
+    
+</container>
