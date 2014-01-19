@@ -28,7 +28,7 @@ class BitpayInvoicePlugin extends AbstractPlugin
      *
      * @param BitPay $bitPay
      */
-    public function __construct(BitPay $bitPay)
+    public function __construct(BitPay $bitpay)
     {
         parent::__construct();
 
@@ -40,7 +40,7 @@ class BitpayInvoicePlugin extends AbstractPlugin
      */
     public function processes($paymentSystemName)
     {
-        return 'bitpay_invoice' === $paymentSystemName;
+        return 'bitpay_invoice_checkout' === $paymentSystemName;
     }
 
     /**
@@ -66,17 +66,17 @@ class BitpayInvoicePlugin extends AbstractPlugin
 //             $errorBuilder->addDataError('currency', 'form.error.required');
 //         }
 
-        if (!$extendedData->has('orderId')) {
-            $errorBuilder->addDataError('orderId', 'form.error.required');
-        }
+//         if (!$extendedData->has('orderId')) {
+//             $errorBuilder->addDataError('orderId', 'form.error.required');
+//         }
 
-        if (!$extendedData->has('posData')) {
-            $errorBuilder->addDataError('posData', 'form.error.required');
-        }
+//         if (!$extendedData->has('posData')) {
+//             $errorBuilder->addDataError('posData', 'form.error.required');
+//         }
 
-        if (!$extendedData->has('options')) {
-            $errorBuilder->addDataError('options', 'form.error.required');
-        }
+//         if (!$extendedData->has('options')) {
+//             $errorBuilder->addDataError('options', 'form.error.required');
+//         }
 
         if ($errorBuilder->hasErrors()) {
             throw $errorBuilder->getException();

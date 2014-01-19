@@ -7,14 +7,12 @@
     <parameters>
         <parameter key="payment.plugin.bitpay_invoice_checkout.class">Sescandell\Payment\BitpayBundle\Plugin\BitpayInvoicePlugin</parameter>
         <parameter key="payment.form.bitpay_invoice_checkout_type.class">Sescandell\Payment\BitpayBundle\Form\Type\BitpayInvoiceType</parameter>
-        <parameter key="payment.bitpay.client.class">Bitpay\Bitpay</parameter>
-        
-        <parameter key="payment.bitpay.request">Bitpay\Bitpay</parameter>
+        <parameter key="payment.bitpay.client.class">BitPay\BitPay</parameter>
     </parameters>
 
     <services>
-        <service id="payment.bitpay.request.curl"   class="Bitpay\Request\Curl" public="false"></service>
-        <service id="payment.bitpay.encrypter.hash" class="Bitpay\Encrypter\Hash" public="false">
+        <service id="payment.bitpay.request.curl"   class="BitPay\Request\Curl" public="false"></service>
+        <service id="payment.bitpay.encrypter.hash" class="BitPay\Encrypter\Hash" public="false">
             <argument>%payment.bitpay.encrypter.key%</argument>
         </service>
         
