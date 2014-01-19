@@ -21,10 +21,10 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder();
 
-        return $treeBuilder
+        $treeBuilder
             ->root('sescandell_payment_bitpay', 'array')
+                ->addDefaultsIfNotSet()
                 ->children()
-                    ->addDefaultsIfNotSet()
                     ->arrayNode('notifications')
                         ->isRequired()
                         ->cannotBeEmpty()
@@ -48,7 +48,27 @@ class Configuration implements ConfigurationInterface
                             ->thenInvalid('Invalid Bitpay transaction speed "%s"')
                         ->end()
                     ->end()
-            ->end()
-            ->buildTree();
+                    ->scalarNode('encrypter_key')
+                        ->isRequired()
+                        ->cannotBeEmpty()
+                    ->end()
+                    ->arrayNode('services')
+                        ->addDefaultsIfNotSet()
+                        ->children()
+                            ->scalarNode('request')
+                                ->isRequired()
+                                ->cannotBeEmpty()
+                                ->defaultValue('payment.bitpay.request.curl')
+                            ->end()
+                            ->scalarNode('encrypter')
+                                ->isRequired()
+                                ->cannotBeEmpty()
+                                ->defaultValue('payment.bitpay.encrypter.hash')
+                            ->end()
+                        ->end()
+                    ->end()
+            ->end();
+
+        return $treeBuilder;
     }
 }

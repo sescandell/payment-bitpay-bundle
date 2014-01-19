@@ -8,10 +8,20 @@
         <parameter key="payment.plugin.bitpay_invoice_checkout.class">Sescandell\Payment\BitpayBundle\Plugin\BitpayInvoicePlugin</parameter>
         <parameter key="payment.form.bitpay_invoice_checkout_type.class">Sescandell\Payment\BitpayBundle\Form\Type\BitpayInvoiceType</parameter>
         <parameter key="payment.bitpay.client.class">Bitpay\Bitpay</parameter>
+        
+        <parameter key="payment.bitpay.request">Bitpay\Bitpay</parameter>
     </parameters>
 
     <services>
-        <service id="payment.bitpay.client" class="%payment.bitpay.client.class%"></service>
+        <service id="payment.bitpay.request.curl"   class="Bitpay\Request\Curl" public="false"></service>
+        <service id="payment.bitpay.encrypter.hash" class="Bitpay\Encrypter\Hash" public="false">
+            <argument>%payment.bitpay.encrypter.key%</argument>
+        </service>
+        
+        <service id="payment.bitpay.client" class="%payment.bitpay.client.class%">
+            <argument type="service" id="payment.bitpay.request" />
+            <argument type="service" id="payment.bitpay.encrypter" />
+        </service>
         
         <service id="payment.plugin.bitpay_invoice_checkout" class="%payment.plugin.bitpay_invoice_checkout.class%">
             <argument type="service" id="payment.bitpay.client" />
